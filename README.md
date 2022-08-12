@@ -1,32 +1,11 @@
-<!-- archived-provider -->
-This Terraform provider is archived, per our [provider archiving process](https://terraform.io/docs/internals/archiving.html). What does this mean?
-
-1. The code repository and all commit history will still be available.
-1. Existing released binaries will remain available on the releases site.
-1. Documentation will remain on the Terraform website.
-1. Issues and pull requests are not being monitored.
-1. New releases will not be published.
-
-
-Please see https://github.com/hashicorp/terraform-provider-template/issues/85 and the documentation for recommended replacements.
-
----
-
-<!-- /archived-provider -->
-
 Terraform Provider
 ==================
 
-- Website: https://www.terraform.io
-- [![Gitter chat](https://badges.gitter.im/hashicorp-terraform/Lobby.png)](https://gitter.im/hashicorp-terraform/Lobby)
-- Mailing list: [Google Groups](http://groups.google.com/group/terraform-tool)
+This is a fork of the archived [hashicorp/template](https://registry.terraform.io/providers/hashicorp/template) provider.
+This fork exists for two reasons:
 
-<img src="https://cdn.rawgit.com/hashicorp/terraform-website/master/content/source/assets/images/logo-hashicorp.svg" width="600px">
-
-Maintainers
------------
-
-This provider plugin is maintained by the Terraform team at [HashiCorp](https://www.hashicorp.com/).
+- There is no arm64 build of the archived provider available
+- There is currently no built-in 'templatestring' function
 
 Requirements
 ------------
@@ -37,10 +16,17 @@ Requirements
 Usage
 ---------------------
 
-```
-# For example, restrict template version in 0.1.x
-provider "template" {
-  version = "~> 0.1"
+To make the provider available for use in your module, you must first declare
+it as a required provider inside your `terraform` block:
+
+```hcl
+terraform {
+  required_providers {
+    template = {
+      source = "lewispeckover/template"
+      version = "~> 2.2.1"
+    }
+  }
 }
 ```
 
